@@ -1,32 +1,24 @@
-import { PagesComponent } from './pages/pages.component';
-import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
-import { Grafica1Component } from './pages/grafica1/grafica1.component';
+
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ProgressComponent } from './pages/progress/progress.component';
-import { RegisterComponent } from './auth/register/register.component';
+
+//Modulos
+import { PagesRoutingModule } from './pages/pages.routing';
+import { AuthRoutingModule } from './auth/auth.routing';
+
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+
 
 const routes: Routes = [
-  {
-    path: '',
-    component: PagesComponent,
-    children: [
 
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'progress', component: ProgressComponent },
-      { path: 'grafica1', component: Grafica1Component },
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  // he criado otras rutas para ser mas seguro y las llamo en el import de routing.module
+  // path: 'dashboard' PagesRoutingModule
 
-    ]
-  },
+  // path: 'auth' AuthRoutingModule
 
-
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-
-
+  // path: '', redirectTo: redireciona al /dashboard
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  //si no encuentra ningun component me lleva a la pagina de error NopagefoundComponent
   { path: '**', component: NopagefoundComponent },
 ];
 
@@ -34,7 +26,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    PagesRoutingModule,
+    AuthRoutingModule
   ],
   exports: [RouterModule]
 })
